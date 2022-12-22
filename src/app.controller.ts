@@ -9,6 +9,10 @@ export class AppController {
   getHello(): string {
     return this.appService.getHello();
   }
+  @Get('env')
+  getEnvs(): string {
+    return this.appService.getENvs();
+  }
 
   @Get('nuevo')
   newEndpoint() {
