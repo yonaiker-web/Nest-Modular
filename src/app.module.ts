@@ -1,11 +1,13 @@
 import { Module } from '@nestjs/common';
+import { ConfigModule } from '@nestjs/config';
+import * as Joi from 'joi';
+
 import { AppService } from './app.service';
 import { UsersModule } from './users/users.module';
 import { ProductsModule } from './products/products.module';
 import { firstValueFrom } from 'rxjs';
 import { HttpModule, HttpService } from '@nestjs/axios';
 import { DatabaseModule } from './database/database.module';
-import { ConfigModule } from '@nestjs/config';
 import { enviroments } from './enviroments';
 import { AppController } from './app.controller';
 import config from './config';
@@ -17,12 +19,18 @@ import config from './config';
     UsersModule,
     HttpModule,
     DatabaseModule,
-    //agregamos el modulo de nest para variables de entorno y espesificamos la ruta de donde jalara la config y ponemos como global
+    //agregamos el modulo de nest para variables de entorno y especificamos la ruta de donde jalara la config y ponemos como global
     ConfigModule.forRoot({
       envFilePath: enviroments[process.env.NODE_ENV] || '.env',
       //carga el objeto de la estructura de la config
       load: [config],
       isGlobal: true,
+      //agreamos una validacion de esquema
+      validationSchema: Joi.object({
+        API_KEY: Joi.number().required(),
+        DATABASE_NAME: Joi.string().required(),
+        DATABASE_PORT: Joi.number().required(),
+      }),
     }),
   ],
   controllers: [AppController],
