@@ -8,6 +8,7 @@ import { DatabaseModule } from './database/database.module';
 import { ConfigModule } from '@nestjs/config';
 import { enviroments } from './enviroments';
 import { AppController } from './app.controller';
+import config from './config';
 
 @Module({
   //imports nos sirve para importan otros modulos y separar los controladores y servicios
@@ -19,6 +20,8 @@ import { AppController } from './app.controller';
     //agregamos el modulo de nest para variables de entorno y espesificamos la ruta de donde jalara la config y ponemos como global
     ConfigModule.forRoot({
       envFilePath: enviroments[process.env.NODE_ENV] || '.env',
+      //carga el objeto de la estructura de la config
+      load: [config],
       isGlobal: true,
     }),
   ],
