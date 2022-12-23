@@ -5,7 +5,7 @@ import {
   IsNotEmpty,
   IsPositive,
 } from 'class-validator';
-import { PartialType } from '@nestjs/mapped-types';
+import { PartialType } from '@nestjs/swagger';
 
 export class CreateProductDto {
   @IsString()
@@ -20,6 +20,10 @@ export class CreateProductDto {
   @IsNotEmpty()
   @IsPositive()
   readonly price: number;
+
+  @IsString()
+  @IsNotEmpty()
+  readonly brand: string;
 
   @IsNumber()
   @IsNotEmpty()

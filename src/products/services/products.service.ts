@@ -13,6 +13,7 @@ export class ProductsService {
       description: 'lorem2 lorem',
       price: 10000,
       stock: 300,
+      brand: 'none',
       image: 'https://i.imgur.com/U4iGx1j.jpeg',
     },
   ];
