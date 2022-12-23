@@ -21,6 +21,9 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('docs', app, document);
 
+  //configurando el cors
+  app.enableCors();
+
   await app.listen(3015);
   console.log('Servidor corriendo en el puerto 3015');
 }
